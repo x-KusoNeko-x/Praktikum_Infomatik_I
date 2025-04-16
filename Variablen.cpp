@@ -84,6 +84,25 @@ int main()
     
     std::cout << "Konstante iZweite ausser block ist " << iZweite << std::endl;
 
+    char cName1 = sVorname[0];
+    char cName2 = sVorname[1];
+
+    int iName1 = (int)cName1;
+    int iName2 = (int)cName2;
+
+    std::cout << "ASCII von erste Buchstabe ist" << iName1 << std::endl;
+    std::cout << "ASCII von zweite Buchstabe ist" << iName2 << std::endl;
+
+    int iPosition1 = 0;
+    int iPosition2 = 0;
+
+    iPosition1 = (iName1 - 64) % 26;
+    iPosition2 = (iName2 - 96) % 26;
+
+    std::cout << "Buchstabe " << cName1 << " ist " << iPosition1 << "-te Buchstabe von Alphabet" <<std::endl;
+    std::cout << "Buchstabe " << cName2 << " ist " << iPosition2 << "-te Buchstabe von Alphabet" <<std::endl;
+     
+
     return 0;
     
 }
