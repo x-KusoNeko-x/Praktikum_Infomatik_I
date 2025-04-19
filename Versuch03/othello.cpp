@@ -2,7 +2,7 @@
  * Praktikum Informatik 1 
  * 
  *
- * @file main.cpp
+ * @file othello.cpp
  *
  * Die Funktionen fuer das Spiel Othello
  */
@@ -150,7 +150,7 @@ int gewinner(const int spielfeld[GROESSE_Y][GROESSE_X])
 bool aufSpielfeld(const int posX, const int posY)
 {
     // Hier erfolgt jetzt Ihre Implementierung ...
-    if (posX < GROESSE_X && posY < GROESSE_Y)
+    if (posX < GROESSE_X && posY < GROESSE_Y && posX >= 0 && posY >= 0)
     {
         return true;
     }
@@ -158,7 +158,7 @@ bool aufSpielfeld(const int posX, const int posY)
     {
         return false;
     }
-    return true;
+
 }
 
 
@@ -359,6 +359,19 @@ void spielen(const int spielerTyp[2])
     switch (gewinner(spielfeld))
     {
         // Hier erfolgt jetzt Ihre Implementierung ...
+
+        case 0:{
+            std::cout << "draw" << std::endl;
+            break;
+        }
+        case 1:{
+            std::cout << "spieler 1 win" << std::endl;
+            break;
+        }
+        case 2:{
+            std::cout << "spieler 2 win" << std::endl;
+            break;
+        }
     }
 }
 
@@ -381,16 +394,64 @@ int main()
     
     // Die folgenden drei Zeilen werden auskommentiert oder geloescht, nachdem Sie die Funktion spielen()
     // implementiert haben (waeren sonst doppelt)
-    int spielfeld[GROESSE_Y][GROESSE_X];
+    // int spielfeld[GROESSE_Y][GROESSE_X];
 
-    initialisiereSpielfeld(spielfeld);
+    // initialisiereSpielfeld(spielfeld);
 
-    zeigeSpielfeld(spielfeld);
+    // zeigeSpielfeld(spielfeld);
 
     // int spielerTyp[2] = { COMPUTER, COMPUTER };  // Feld, das Informationen ueber den Typ des Spielers enthaelt. MENSCH(=1) oder COPMUTER(=2)
     // spielen(spielerTyp);
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    char spieler1;
+    char spieler2;
+
+    std::cout << "ist Spieler1 ein Computer?(j/n)" << std::endl;
+    std::cin >> spieler1;
+    std::cout << "ist Spieler2 ein Computer?(j/n)" << std::endl;
+    std::cin >> spieler2;
+
+    int spielerTyp[2];
+
+    if (spieler1 == 'j')
+    {
+        if (spieler2 == 'j')
+        {
+            spielerTyp[0] = 2;
+            spielerTyp[1] = 2;
+            spielen(spielerTyp);
+        }
+        else
+        {
+            spielerTyp[0] = 2;
+            spielerTyp[1] = 1;
+            spielen(spielerTyp);
+        }
+        
+    }
+    else
+    {
+        if (spieler2 == 'j')
+        {
+            spielerTyp[0] = 1;
+            spielerTyp[1] = 2;
+            spielen(spielerTyp);
+        }
+        else
+        {
+            spielerTyp[0] = 1;
+            spielerTyp[1] = 1;
+            spielen(spielerTyp);
+        }
+        
+    }
+    
+    int spielfeld[GROESSE_Y][GROESSE_X];
+
+    initialisiereSpielfeld(spielfeld);
+
+    zeigeSpielfeld(spielfeld);
     
     return 0;
 }
