@@ -435,15 +435,39 @@ int main()
     std::cout << "ist Spieler 2 Computer?(j/n)";
     std::cin >> spieler2;
 
-    if (spieler1 == 'j') {
-        if (spieler2 == 'j') {
-            int spielerTyp[2] = { 2, 2 }; // Feld, das Informationen ueber den Typ des Spielers enthaelt. MENSCH(=1) oder COMPUTER(=2)
+    int spielerTyp[2];
+
+    if (spieler1 == 'j')
+    {
+        if (spieler2 == 'j')
+        {
+            spielerTyp[0] = 2;
+            spielerTyp[1] = 2;
             spielen(spielerTyp);
-        }         
+        }
+        else
+        {
+            spielerTyp[0] = 2;
+            spielerTyp[1] = 1;
+            spielen(spielerTyp);
+        }
+
     }
-    else {
-        int spielerTyp[2] = { 1, 1 };  // Feld, das Informationen ueber den Typ des Spielers enthaelt. MENSCH(=1) oder COPMUTER(=2)
-        spielen(spielerTyp);
+    else
+    {
+        if (spieler2 == 'j')
+        {
+            spielerTyp[0] = 1;
+            spielerTyp[1] = 2;
+            spielen(spielerTyp);
+        }
+        else
+        {
+            spielerTyp[0] = 1;
+            spielerTyp[1] = 1;
+            spielen(spielerTyp);
+        }
+
     }
 
     int spielfeld[GROESSE_Y][GROESSE_X];
