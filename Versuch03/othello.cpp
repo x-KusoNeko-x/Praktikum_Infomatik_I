@@ -270,6 +270,23 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
             // allen Richtungen in Ihre eigenen Steine umgewandelt werden
             //
             // Hier erfolgt jetzt Ihre Implementierung ...
+            int tmp_X = posX + i;
+            int tmp_Y = posY + i;
+            bool tmp_gegner;
+
+            while (aufSpielfeld(tmp_X, tmp_Y))
+            {
+                if (spielfeld[tmp_Y][tmp_X] == gegner)
+                {
+                    tmp_gegner = true;
+                }
+                else if (spielfeld[tmp_Y][tmp_X] == aktuellerSpieler)
+                {
+                    /* code */
+                }
+                
+            }
+            
         }
     }
 
@@ -355,6 +372,19 @@ void spielen(const int spielerTyp[2])
     // solange noch Zuege bei einem der beiden Spieler moeglich sind
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    while (moeglicheZuege(spielfeld,aktuellerSpieler) != 0)
+    {
+        if (aktuellerSpieler == MENSCH)
+        {
+            menschlicherZug(spielfeld,aktuellerSpieler);
+        }
+        else
+        {
+            computerZug(spielfeld,aktuellerSpieler);
+        }
+        
+    }
+    
     
     switch (gewinner(spielfeld))
     {
