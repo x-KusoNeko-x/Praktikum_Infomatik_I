@@ -120,6 +120,25 @@ bool zugAusfuehrenTest(int eingabeFeld[GROESSE_Y][GROESSE_X], const int ergebnis
     // wenn AUSFUEHRLICH gleich 1 werden zusaetzlich beide Spielfelder ausgegeben   
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    if (eingabeFeld[posY][posX] != 0)
+    {
+        std::cout << "test " << testNummer << " ergebniss: " << std::endl;
+        std::cout << "ungueltige position" << std::endl << "________________";
+        return true;
+    }
+    else if ( eingabeFeld[posY][posX] == 0)
+    {
+        std::cout << "test " << testNummer << " ergebniss: " << std::endl;
+        zugAusfuehren(eingabeFeld,spieler,posX,posY);
+        std::cout << "antwort ist:" << std::endl;
+        zeigeSpielfeld(eingabeFeld);
+        std::cout << "loesung ist:" << std::endl;
+        zeigeSpielfeld(ergebnisFeld);
+        std::cout << std::endl << "________________" << std::endl;
+        return true;
+    }
+    
+    
 
     return 0;
 }
@@ -131,6 +150,18 @@ bool moeglicheZuegeTest(const int eingabeFeld[GROESSE_Y][GROESSE_X], const int s
     // wenn AUSFUEHRLICH gleich 1 wird zusaetzlich das Spielfeld, der berechnete falsche und der richtige Wert ausgegeben
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    if (moeglicheZuege(eingabeFeld,spieler) == richtig)
+    {
+        std::cout << "test " << testNummer << " bestanden" << std::endl << std::endl;
+        return true;
+    }
+    if (moeglicheZuege(eingabeFeld,spieler) != richtig)
+    {
+        std::cout << "test " << testNummer << " nicht bestanden!" << std::endl << std::endl;
+        return false;
+    }
+    
+    
 
     return 0;
 }
@@ -537,6 +568,8 @@ bool ganzenTestAusfuehren()
         for (int i = 0; i < 10; i++)
         {
             // Hier erfolgt jetzt Ihre Implementierung (entsprechende Testfunktion aufrufen) ...
+            zugAusfuehrenTest(eingabeFeld[i],ergebnisFeld[i],spieler[i],position[i][0],position[i][1],i);
+            
         }
     }
 
