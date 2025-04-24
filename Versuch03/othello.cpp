@@ -192,57 +192,41 @@ bool zugGueltig(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSp
         for (int i = -1; i <= 1; i++)
         {
             // Hier erfolgt jetzt Ihre Implementierung ...
-                if (spielfeld[posY + i][posX] == gegner)
+                if (i == 0 && j == 0)
                 {
-                    int tmp = 1;
-                    while (aufSpielfeld(posY + i + tmp, posX))
-                    {
-                        if (spielfeld[posY + i + tmp][posX] == aktuellerSpieler)
-                        {
-                            return true;
-                        }
-                        if (spielfeld[posY + i + tmp][posX] == gegner)
-                        {
-                            tmp++;
-                        }
-                        if (spielfeld[posY + i + tmp][posX] == 0)
-                        {
-                            return false;
-                            break;
-                        }
-                        
-                    }
-                    
+                    continue;
                 }
-                if (spielfeld[posY][posX + j] == gegner)
+                
+                if (spielfeld[posY + i][posX + j] == gegner)
                 {
-                    int tmp = 1;
-                    while (aufSpielfeld(posY, posX + j + tmp))
+                    int tmp_i = i;
+                    int tmp_j = j;
+
+                    while (aufSpielfeld(posX + tmp_j, posY + tmp_i))
                     {
-                        if (spielfeld[posY][posX + j + tmp] == aktuellerSpieler)
+                        if (spielfeld[posY + tmp_i][posX + tmp_j] == aktuellerSpieler)
                         {
                             return true;
                         }
-                        if (spielfeld[posY][posX + j + tmp] == gegner)
+                        if (spielfeld[posY + tmp_i][posX + tmp_j] == gegner)
                         {
-                            tmp++;
+                            tmp_i = tmp_i + i;
+                            tmp_j = tmp_j + j;
                         }
-                        if (spielfeld[posY][posX + j + tmp] == 0)
+                        if (spielfeld[posY + tmp_i][posX + tmp_j] == 0)
                         {
                             return false;
-                            break;
                         }
                         
                     }
-                    
                 }
                 else
                 {
-                    return false;
+                    continue;
                 }
                 
-            
-            
+
+
         }
     }
     return false;
@@ -272,20 +256,54 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
             // Hier erfolgt jetzt Ihre Implementierung ...
             int tmp_X = posX + i;
             int tmp_Y = posY + i;
-            bool tmp_gegner;
 
-            while (aufSpielfeld(tmp_X, tmp_Y))
-            {
-                if (spielfeld[tmp_Y][tmp_X] == gegner)
+            if (spielfeld[posY + i][posX] == gegner)
                 {
-                    tmp_gegner = true;
+                    int tmp = 1;
+                    while (aufSpielfeld(tmp_Y + tmp, posX))
+                    {
+                        if (spielfeld[tmp_Y + tmp][posX] == aktuellerSpieler)
+                        {
+                            spielfeld[tmp_Y][tmp_X] = aktuellerSpieler;
+                            tmp = 1;
+                        }
+                        if (spielfeld[posY + i + tmp][posX] == gegner)
+                        {
+                            break;
+                        }
+                        if (spielfeld[posY + i + tmp][posX] == 0)
+                        {
+                            break;
+                        }
+                        
+                    }
+                    
                 }
-                else if (spielfeld[tmp_Y][tmp_X] == aktuellerSpieler)
+                if (spielfeld[posY][posX + j] == gegner)
                 {
-                    /* code */
+                    int tmp = 1;
+                    while (aufSpielfeld(posY, tmp_X + tmp))
+                    {
+                        if (spielfeld[posY][tmp_X + tmp] == aktuellerSpieler)
+                        {
+                            spielfeld[posY][posX] = aktuellerSpieler;
+                        }
+                        if (spielfeld[posY][posX + j + tmp] == gegner)
+                        {
+                            break;
+                        }
+                        if (spielfeld[posY][posX + j + tmp] == 0)
+                        {
+                            break;
+                        }
+                        
+                    }
+                    
                 }
-                
-            }
+                else
+                {
+                    break;
+                }
             
         }
     }
