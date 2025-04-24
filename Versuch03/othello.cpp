@@ -215,16 +215,16 @@ bool zugGueltig(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSp
                         }
                         if (spielfeld[posY + tmp_i][posX + tmp_j] == 0)
                         {
-                            return false;
+                            break;
                         }
-                        
+
                     }
                 }
                 else
                 {
                     continue;
                 }
-                
+
 
 
         }
@@ -296,11 +296,6 @@ int moeglicheZuege(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuelle
             {
                 tmp++;
             }
-            else
-            {
-                continue;
-            }
-            
         }
         
     }
