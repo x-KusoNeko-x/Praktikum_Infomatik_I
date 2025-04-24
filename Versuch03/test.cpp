@@ -72,6 +72,19 @@ bool aufSpielfeldTest(const int posX, const int posY, const bool richtig, const 
     // ueberprueft, ob eine gegebene Position auf dem Spielfeld ist
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    if (aufSpielfeld(posY, posX) == richtig)
+    {
+        std::cout << "test " << testNummer << " bestanden" << std::endl << std::endl;
+        return true;
+    }
+    if (aufSpielfeld(posY, posX) != richtig)
+    {
+        std::cout << "test " << testNummer << " nicht bestanden" << std::endl << std::endl;
+        return false;
+    }
+    
+
+    
 
     return 0;
 }
@@ -84,6 +97,17 @@ bool zugGueltigTest(const int eingabeFeld[GROESSE_Y][GROESSE_X], const int spiel
     // wenn AUSFUEHRLICH gleich 1 wird zusaetzlich das Spielfeld und die ungueltige Position ausgegeben
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
+    if (zugGueltig(eingabeFeld,spieler,posX,posY) == richtig)
+    {
+        std::cout << "test " << testNummer << " bestanden" << std::endl << std::endl;
+        return true;
+    }
+    if (zugGueltig(eingabeFeld,spieler,posX,posY) != richtig)
+    {
+        std::cout << "test " << testNummer << " nicht bestanden" << std::endl << std::endl;
+        return false;
+    }
+    
 
     return 0;
 }
@@ -168,7 +192,7 @@ bool ganzenTestAusfuehren()
             }
         }
 
-        std::cout << "Ende des Tests fuer 'gewinner()'" << std::endl << std::endl;
+        std::cout << "Ende des Tests fuer 'gewinner()'" << std::endl << std::endl <<"beginn test fuer aufspielfeld"<<std::endl;
     }
 
 // ---------- TESTE POSITION IM FELD---------- //
@@ -179,7 +203,19 @@ bool ganzenTestAusfuehren()
         for (int i = 0; i < 6; i++)
         {
             // Hier erfolgt jetzt Ihre Implementierung (entsprechende Testfunktion aufrufen) ...
+            if (aufSpielfeldTest(position[i][0],position[i][1],korrektesErgebnis[i],i) == true && gesamtErgebnis == true)
+            {
+                gesamtErgebnis = true;
+            }
+            else
+            {
+                gesamtErgebnis = false;
+            }
+            
+            
         }
+        std::cout << "ende test fuer aufspielfeld" << std::endl<<std::endl<<"beginn test fuer zuggueltig"<<std::endl;
+        
     }
     
 // ---------- TESTE ZUG GUELTIG ---------- //
@@ -264,7 +300,17 @@ bool ganzenTestAusfuehren()
         for (int i = 0; i < 7; i++)
         {
             // Hier erfolgt jetzt Ihre Implementierung (entsprechende Testfunktion aufrufen) ...
+            if (zugGueltigTest(eingabeFeld[i],spieler[i],position[i][0],position[i][1],korrektesErgebnis[i],i) == true && gesamtErgebnis == true)
+            {
+                gesamtErgebnis = true;
+            }
+            else
+            {
+                gesamtErgebnis = false;
+            }
+            
         }
+        std::cout << "ende test fuer zuggueltig" << std::endl << std::endl;
     }
 
 
@@ -527,6 +573,5 @@ bool ganzenTestAusfuehren()
             // Hier erfolgt jetzt Ihre Implementierung (entsprechende Testfunktion aufrufen) ...
         }
     }
-
     return gesamtErgebnis;
 }
