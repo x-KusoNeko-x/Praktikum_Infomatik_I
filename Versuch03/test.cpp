@@ -126,7 +126,7 @@ bool zugAusfuehrenTest(int eingabeFeld[GROESSE_Y][GROESSE_X], const int ergebnis
         std::cout << "ungueltige position" << std::endl << "________________";
         return true;
     }
-    else if ( eingabeFeld[posY][posX] == 0)
+    else if (eingabeFeld[posY][posX] == 0)
     {
         std::cout << "test " << testNummer << " ergebniss: " << std::endl;
         zugAusfuehren(eingabeFeld,spieler,posX,posY);
@@ -341,7 +341,7 @@ bool ganzenTestAusfuehren()
             }
             
         }
-        std::cout << "ende test fuer zuggueltig" << std::endl << std::endl;
+        std::cout << "ende test fuer zuggueltig" << std::endl << std::endl << "beginn test fuer zugausfuehren" << std::endl;
     }
 
 
@@ -571,6 +571,7 @@ bool ganzenTestAusfuehren()
             zugAusfuehrenTest(eingabeFeld[i],ergebnisFeld[i],spieler[i],position[i][0],position[i][1],i);
             
         }
+        std::cout << "ende test fuer zugausfuehren" << std::endl<<std::endl<<"beginn test fuer moigiche zuege"<<std::endl;
     }
 
 
@@ -604,7 +605,21 @@ bool ganzenTestAusfuehren()
         for (int i = 0; i < 2; i++)
         {
             // Hier erfolgt jetzt Ihre Implementierung (entsprechende Testfunktion aufrufen) ...
+            bool tmp_ergebniss = moeglicheZuegeTest(eingabeFeld[i],spieler[i],korrektesErgebnis[i],i);
+
+            if (gesamtErgebnis == true && tmp_ergebniss == true)
+            {
+                gesamtErgebnis = true;
+                std::cout << "test " << i << " bestanden" << std::endl;
+            }
+            else
+            {
+                gesamtErgebnis = false;
+                std::cout << "test " << i << " nicht bestanden" << std::endl;
+            }
+            
         }
+        std::cout << "ende test fuer moegliche zuege" << std::endl<<std::endl<<"ende alle teste"<<std::endl;
     }
     return gesamtErgebnis;
 }
