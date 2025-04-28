@@ -129,6 +129,7 @@ bool zugAusfuehrenTest(int eingabeFeld[GROESSE_Y][GROESSE_X], const int ergebnis
     else if (eingabeFeld[posY][posX] == 0)
     {
         std::cout << "test " << testNummer << " ergebniss: " << std::endl;
+        eingabeFeld[posY][posX] = spieler;
         zugAusfuehren(eingabeFeld,spieler,posX,posY);
         std::cout << "antwort ist:" << std::endl;
         zeigeSpielfeld(eingabeFeld);
