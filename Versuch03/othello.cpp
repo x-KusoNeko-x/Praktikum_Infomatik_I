@@ -254,24 +254,48 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
             // allen Richtungen in Ihre eigenen Steine umgewandelt werden
             //
             // Hier erfolgt jetzt Ihre Implementierung ...
+            if (i==0 && j==0)
+            {
+                continue;
+            }
+            
             if (spielfeld[posY + i][posX + j] == gegner)
                 {
-                    int tmp_i = i + i;
-                    int tmp_j = j + j;
+                    int tmp_i = i;
+                    int tmp_j = j;
+                    int cnt = 1;
 
                     while (aufSpielfeld(posX + tmp_j, posY + tmp_i))
                     {
                         if (spielfeld[posY + tmp_i][posX + tmp_j] == gegner)
                         {
-                            spielfeld[posY + tmp_i][posX + tmp_j] = aktuellerSpieler;
                             tmp_i = tmp_i + i;
                             tmp_j = tmp_j + j;
+                            cnt++;
+                            continue;
                         }
-                        if (spielfeld[posY + tmp_i][posX + tmp_j] == aktuellerSpieler)
+                        else if (spielfeld[posY + tmp_i][posX + tmp_j] == aktuellerSpieler)
                         {
-                            break;
+                            if (cnt != 0)
+                            {
+                                int tmp_y = posY + tmp_i;
+                                int tmp_x = posX + tmp_j;
+
+                                while (cnt != 0)
+                                {
+                                    spielfeld[tmp_y][tmp_x] = aktuellerSpieler;
+                                    tmp_x = tmp_x - j;
+                                    tmp_y = tmp_y -i;
+                                    cnt--;
+                                }
+                                
+                            }
+                            else if (cnt == 0)
+                            {
+                                break;
+                            }  
                         }
-                        if (spielfeld[posY + tmp_i][posX + tmp_j] == 0)
+                        else if (spielfeld[posY + tmp_i][posX + tmp_j] == 0)
                         {
                             break;
                         }
@@ -287,21 +311,19 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
 int moeglicheZuege(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpieler)
 {
     // Hier erfolgt jetzt Ihre Implementierung ...
-    int tmp = 0;
+    int tmp_moeg = 0;
     for (int i = 0; i < GROESSE_X; i++)
     {
         for (int j = 0; j < GROESSE_Y; i++)
         {
             if (zugGueltig(spielfeld, aktuellerSpieler, i, j))
             {
-                tmp++;
+                tmp_moeg++;
             }
         }
         
     }
-    
-    
-    return tmp;
+    return tmp_moeg;
 }
 
 
