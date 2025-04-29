@@ -393,20 +393,29 @@ void spielen(const int spielerTyp[2])
     // solange noch Zuege bei einem der beiden Spieler moeglich sind
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
-    while (moeglicheZuege(spielfeld,aktuellerSpieler) != 0)
+    while (moeglicheZuege(spielfeld,aktuellerSpieler) != 0 || moeglicheZuege(spielfeld,3 - aktuellerSpieler))
     {
-        if (spielerTyp[aktuellerSpieler - 1] == MENSCH)
+        if (moeglicheZuege(spielfeld,aktuellerSpieler) != 0)
         {
+            if (spielerTyp[aktuellerSpieler - 1] == MENSCH)
+           {
             menschlicherZug(spielfeld,aktuellerSpieler);
 
-        }
-        else if (spielerTyp[aktuellerSpieler - 1] ==  COMPUTER)
-        {
+           }
+            else if (spielerTyp[aktuellerSpieler - 1] == COMPUTER)
+           {
             computerZug(spielfeld,aktuellerSpieler);
 
-        }
+           }
         zeigeSpielfeld(spielfeld);
         aktuellerSpieler = 3 - aktuellerSpieler;
+        }
+        else
+        {
+            aktuellerSpieler = 3 - aktuellerSpieler;
+        }
+        
+        
     }
     
     
@@ -463,10 +472,21 @@ int main()
 
     std::cout << "ist Spieler1 ein Computer?(j/n)" << std::endl;
     std::cin >> spieler1;
-    //spieler1 = 'j';
+
+    while (spieler1 != 'j' && spieler1 != 'n')
+    {
+        std::cout << "falsche eingabe, geben sie mal erneurt" << std::endl;
+        std::cin >> spieler1;
+    }
+    
     std::cout << "ist Spieler2 ein Computer?(j/n)" << std::endl;
     std::cin >> spieler2;
-    //spieler2 = 'j';
+
+    while (spieler2 != 'j' && spieler2 != 'n')
+    {
+        std::cout << "falsche eingabe, geben sie mal erneurt" << std::endl;
+        std::cin >> spieler2;
+    }
 
     int spielerTyp[2] = {2,2};
 
