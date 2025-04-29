@@ -258,12 +258,12 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
             {
                 continue;
             }
-            
+
             if (spielfeld[posY + i][posX + j] == gegner)
                 {
                     int tmp_i = i;
                     int tmp_j = j;
-                    int cnt = 1;
+                    int cnt = 2;
 
                     while (aufSpielfeld(posX + tmp_j, posY + tmp_i))
                     {
@@ -288,12 +288,12 @@ void zugAusfuehren(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpiel
                                     tmp_y = tmp_y -i;
                                     cnt--;
                                 }
-                                
+
                             }
                             else if (cnt == 0)
                             {
                                 break;
-                            }  
+                            }
                         }
                         else if (spielfeld[posY + tmp_i][posX + tmp_j] == 0)
                         {
@@ -314,11 +314,19 @@ int moeglicheZuege(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuelle
     int tmp_moeg = 0;
     for (int i = 0; i < GROESSE_X; i++)
     {
-        for (int j = 0; j < GROESSE_Y; i++)
+        for (int j = 0; j < GROESSE_Y; j++)
         {
             if (zugGueltig(spielfeld, aktuellerSpieler, i, j))
             {
                 tmp_moeg++;
+            }
+            else if ( i >= 8  )
+            {
+            	break;
+            }
+            else
+            {
+                continue;
             }
         }
         
@@ -380,22 +388,25 @@ void spielen(const int spielerTyp[2])
     initialisiereSpielfeld(spielfeld);
 
     int aktuellerSpieler = 1;
-    zeigeSpielfeld(spielfeld);
+    //zeigeSpielfeld(spielfeld);
 
     // solange noch Zuege bei einem der beiden Spieler moeglich sind
     //
     // Hier erfolgt jetzt Ihre Implementierung ...
     while (moeglicheZuege(spielfeld,aktuellerSpieler) != 0)
     {
-        if (aktuellerSpieler == MENSCH)
+        if (spielerTyp[aktuellerSpieler - 1] == MENSCH)
         {
             menschlicherZug(spielfeld,aktuellerSpieler);
+
         }
-        else
+        else if (spielerTyp[aktuellerSpieler - 1] ==  COMPUTER)
         {
             computerZug(spielfeld,aktuellerSpieler);
+
         }
-        
+        zeigeSpielfeld(spielfeld);
+        aktuellerSpieler = 3 - aktuellerSpieler;
     }
     
     
@@ -452,10 +463,12 @@ int main()
 
     std::cout << "ist Spieler1 ein Computer?(j/n)" << std::endl;
     std::cin >> spieler1;
+    //spieler1 = 'j';
     std::cout << "ist Spieler2 ein Computer?(j/n)" << std::endl;
     std::cin >> spieler2;
+    //spieler2 = 'j';
 
-    int spielerTyp[2];
+    int spielerTyp[2] = {2,2};
 
     if (spieler1 == 'j')
     {
@@ -471,7 +484,7 @@ int main()
             spielerTyp[1] = 1;
             spielen(spielerTyp);
         }
-        
+
     }
     else
     {
@@ -487,14 +500,10 @@ int main()
             spielerTyp[1] = 1;
             spielen(spielerTyp);
         }
-        
+
     }
     
     int spielfeld[GROESSE_Y][GROESSE_X];
-
-    initialisiereSpielfeld(spielfeld);
-
-    zeigeSpielfeld(spielfeld);
     
     return 0;
 }
