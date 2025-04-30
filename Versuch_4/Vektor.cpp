@@ -1,72 +1,61 @@
 //////////////////////////////////////////////////////////////////////////////
-// Praktikum Informatik 1 
-// 
+// Praktikum Informatik 1 MMXXV
 // Versuch 04: Einf�hrung Klasse
 //
-// Datei:  Vektor.cpp
-// Inhalt: Sourcedatei der Klasse Vektor
+// Datei:  main.cpp
+// Inhalt: Hauptprogramm
 //////////////////////////////////////////////////////////////////////////////
 
 #include "Vektor.h"
 
-Vektor::Vektor(double inX, double inY, double inZ) : x(inX), y(inY), z(inZ)
+int main()
 {
+    
+    Vektor vektor1(1, 0, 0);
+    Vektor vektor2(0, 1, 0);
 
-}
+    std::cout << "Vektor 1:" << std::endl;
+    vektor1.ausgabe();
+    std::cout << "Vektor 2:" << std::endl;
+    vektor2.ausgabe();
+    std::cout << std::endl;
 
-Vektor::~Vektor()
-{
+    // Testen die funktion in Vektor.cpp
+    ////testen funktion sub
+    Vektor sub12 = vektor1.sub(vektor2);
+    Vektor sub21 = vektor2.sub(vektor1);
+    std::cout << "Sub 1 von 2 ist:" << std::endl;
+    sub12.ausgabe();
+    std::cout << "Sub 2 von 1 ist:" << std::endl;
+    sub21.ausgabe();
+    std::cout << std::endl;
 
-}
+    ////testen function laenge
+    double laenge1 = vektor1.laenge();
+    double laenge2 = vektor2.laenge();
+    std::cout << "laenge von vektor 1 ist: " << laenge1 << std::endl;
+    std::cout << "laenge von vektor 2 ist: " << laenge2 << std::endl << std::endl;
 
-/**
- * @brief Function printing the components of the vector 
- */
-void Vektor::ausgabe() const
-{
-    std::cout << "X-Komponente: " << x << std::endl;
-    std::cout << "Y-Komponente: " << y << std::endl;
-    std::cout << "Z-Komponente: " << z << std::endl << std::endl;
-}
+    ////testen function skalarProd
+    double skalarProd12 = vektor1.skalarProd(vektor2);
+    std::cout << "skalarprudukt von vektor1 und 2 ist: " << skalarProd12 << std::endl << std::endl;
 
-//Laenge rechnen
-double Vektor::laenge() const
-{
-    double tmp_xpow = pow(x,2);
-    double tmp_ypow = pow(y,2);
-    double tmp_zpow = pow(z,2);
+    ////testen function winkel
+    double winkelWert = vektor1.winkel(vektor2);
+    std::cout << "winkel zwischen vektor1 und 2 ist: " << winkelWert << " rad" << std::endl << std::endl;
 
-    double tmp_laenge = sqrt(tmp_xpow + tmp_ypow + tmp_zpow);
+    ////testen function rotiereUmZ
+    double rotierWink = M_PI/2;
+    vektor1.rotiereUmZ(rotierWink);
+    std::cout << "vektor 1 dereht sich 90grad um z ist: " << std::endl;
+    vektor1.ausgabe();
 
-    return tmp_laenge;
-}
+    // Ende test;
 
-Vektor Vektor::sub(const Vektor& input) const
-{
-    double tmp_x = x - input.x;
-    double tmp_y = y - input.y;
-    double tmp_z = z - input.z;
-    Vektor subVektor(tmp_x,tmp_y,tmp_z);
-    return subVektor;
-}
+    Vektor erdRadius(0, 0, 0);      // bitte sinnvoll initialisieren
+    Vektor aussichtsPunkt(0, 0, 0); // bitte sinnvoll initialisieren
+    Vektor sicht(0, 0, 0);
 
-double Vektor::skalarProd(const Vektor& input) const
-{
-    double skalarProdWert = (x*input.x) + (y*input.y) + (z*input.z);
-    return skalarProdWert;
-}
+    return 0;
 
-double Vektor::winkel(const Vektor& input) const
-{
-    double tmp_skalarProd = skalarProd(input);
-    double tmp_laenge = laenge();
-    double tmp_laengeInput = sqrt(pow(input.x,2)+pow(input.y,2)+pow(input.z,2));
-    double winkelWert = acos((tmp_laenge*tmp_laengeInput)/tmp_skalarProd);
-    return winkelWert;
-}
-
-void Vektor::rotiereUmZ(const double rad)
-{
-    x = (cos(rad)*x) - (sin(rad)*x);
-    y = (sin(rad)*x) + (cos(rad)*x);
 }
