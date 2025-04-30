@@ -18,6 +18,7 @@ int main()
     vektor1.ausgabe();
     std::cout << "Vektor 2:" << std::endl;
     vektor2.ausgabe();
+    std::cout << std::endl;
 
     // Testen die funktion in Vektor.cpp
     ////testen funktion sub
@@ -27,18 +28,27 @@ int main()
     sub12.ausgabe();
     std::cout << "Sub 2 von 1 ist:" << std::endl;
     sub21.ausgabe();
+    std::cout << std::endl;
 
     ////testen function laenge
     double laenge1 = vektor1.laenge();
     double laenge2 = vektor2.laenge();
     std::cout << "laenge von vektor 1 ist: " << laenge1 << std::endl;
-    std::cout << "laenge von vektor 2 ist: " << laenge2 << std::endl;
+    std::cout << "laenge von vektor 2 ist: " << laenge2 << std::endl << std::endl;
 
     ////testen function skalarProd
+    double skalarProd12 = vektor1.skalarProd(vektor2);
+    std::cout << "skalarprudukt von vektor1 und 2 ist: " << skalarProd12 << std::endl << std::endl;
 
     ////testen function winkel
+    double winkelWert = vektor1.winkel(vektor2);
+    std::cout << "winkel zwischen vektor1 und 2 ist: " << winkelWert << " rad" << std::endl << std::endl;
 
     ////testen function rotiereUmZ
+    double rotierWink = M_PI/2;
+    vektor1.rotiereUmZ(rotierWink);
+    std::cout << "vektor 1 dereht sich 90grad um z ist: " << std::endl;
+    vektor1.ausgabe();
 
     // Ende test;
 
