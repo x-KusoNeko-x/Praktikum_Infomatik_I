@@ -41,6 +41,15 @@ double Vektor::laenge() const
     return tmp_laenge;
 }
 
+Vektor Vektor::plus(const Vektor& input) const
+{
+    double tmp_x = x + input.x;
+    double tmp_y = y + input.y;
+    double tmp_z = z + input.z;
+    Vektor plusVektor(tmp_x,tmp_y,tmp_z);
+    return plusVektor;
+}
+
 Vektor Vektor::sub(const Vektor& input) const
 {
     double tmp_x = x - input.x;
