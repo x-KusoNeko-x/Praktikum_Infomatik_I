@@ -79,14 +79,27 @@ int main()
     {
         erdRadius.rotiereUmZ(schritt_Rad);
         sicht = normVektor.sub(erdRadius);
-        winkel = sicht.winkel(erdRadius);
         schrittCNT++;
+
+        winkel = sicht.winkel(erdRadius);
     }
-    
+
+    double sichtLaenge = sicht.laenge();
+    double hohe = aussichtsPunkt.laenge();
 
     // Output
     std::cout << std::fixed;
     std::cout << std::setprecision(4);
+    std::cout << "sie koennen " << sichtLaenge << " meter weit sehen" << std::endl;
+    std::cout << std::fixed;
+    std::cout << std::setprecision(4);
+    std::cout << "sie sind " << hohe << " meter hoch" << std::endl;
+    std::cout << std::fixed;
+    std::cout << std::setprecision(4);
+    std::cout << "die winkel betraegt " << winkel << " rad" << std::endl;
+    std::cout << std::fixed;
+    std::cout << std::setprecision(0);
+    std::cout << "anzahl schritte: " << schrittCNT << std::endl;
 
     return 0;
 
