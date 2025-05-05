@@ -1,7 +1,7 @@
 //
 // Praktikum Informatik 1 
 // 
-// Versuch 04: Einführung Klasse
+// Versuch 04: Einfï¿½hrung Klasse
 //
 // Datei:  Vektor.h
 // Inhalt: Headerdatei der Klasse Vektor
@@ -22,6 +22,7 @@ class Vektor
 
     void ausgabe() const;
     Vektor sub(const Vektor& input) const;
+    Vektor plus(const Vektor& input) const;
     double laenge() const;
     double skalarProd(const Vektor& input) const;
     double winkel(const Vektor& input) const;
