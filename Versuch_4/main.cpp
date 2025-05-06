@@ -11,8 +11,8 @@
 int main()
 {
     
-    Vektor vektor1(1, 0, 0);
-    Vektor vektor2(0, 1, 0);
+    Vektor vektor1(1, 1, 0);
+    Vektor vektor2(0, 1, 1);
 
     std::cout << "Vektor 1:" << std::endl;
     vektor1.ausgabe();
@@ -60,46 +60,144 @@ int main()
 
     // Horizon
     //variable inportieren
-    Vektor erdRadius(0, 6371, 0);      // bitte sinnvoll initialisieren
+    Vektor erdRadius(0, 6371000, 0);      // bitte sinnvoll initialisieren
     Vektor aussichtsPunkt(0, 557.4, 0); // bitte sinnvoll initialisieren
-    Vektor sicht(0, 0, 0);
+    Vektor sicht(0, -557.4, 0);
     Vektor normVektor(0, 0, 0);
+    Vektor erdRadiusNXT(0, 6371000, 0);
 
     int schrittCNT = 0;
-    double schritt_Rad;
-    double winkel = 1;
+    int gesSchritt = 0;
+    double schritt_Rad = -0.01;
+    double winkel = M_PI;
+    int prec;
 
     // Rechnen
-    std::cout << "geben sie schrittlaenge(in rad) ein :" << std::endl;
-    std::cin >> schritt_Rad;
+    std::cout << "geben sie gewuenschte genauigkeit(in stelle) ein :" << std::endl;
+    std::cin >> prec;
 
-    normVektor = erdRadius.plus(aussichtsPunkt);
-    
-    while (winkel < M_PI/2)
+    //prec = 10;
+
+    while (prec % 1 != 0)
     {
-        erdRadius.rotiereUmZ(schritt_Rad);
-        sicht = normVektor.sub(erdRadius);
-        schrittCNT++;
-
-        winkel = sicht.winkel(erdRadius);
+        std::cout << "ungueltige eingabe, geben sie mal erneurt." << std::endl;
+        std::cin >> prec;
     }
 
-    double sichtLaenge = sicht.laenge();
+    double kommaZ = pow(0.1,prec);
+
+    normVektor = erdRadius.plus(aussichtsPunkt);
+    erdRadiusNXT.rotiereUmZ(schritt_Rad);
+
+    while (schritt_Rad > kommaZ || schritt_Rad < -kommaZ)
+    {
+        if (sicht.winkel(erdRadius) > M_PI/2 && sicht.winkel(erdRadiusNXT) > M_PI/2)
+        {
+            //bei naechste schritt aendert sich die such-richtung nicht
+            //mach weiter bis wir 1 schritt vor richtung aenderung sind
+            erdRadius.rotiereUmZ(schritt_Rad);
+            erdRadiusNXT.rotiereUmZ(schritt_Rad);
+            sicht = erdRadius.sub(normVektor);
+
+            schrittCNT++;
+
+            winkel = sicht.winkel(erdRadius);
+        }
+        else if (sicht.winkel(erdRadius) < M_PI/2 && sicht.winkel(erdRadiusNXT) < M_PI/2)
+        {
+            erdRadius.rotiereUmZ(schritt_Rad);
+            erdRadiusNXT.rotiereUmZ(schritt_Rad);
+            sicht = erdRadius.sub(normVektor);
+
+            schrittCNT++;
+
+            winkel = sicht.winkel(erdRadius);
+        }
+        else if (sicht.winkel(erdRadius) > M_PI/2 && sicht.winkel(erdRadiusNXT) < M_PI/2)
+        {
+            //letzte schritt in dieser richtung
+            //1: letzte schritt machen
+            //2: ausgabe
+            //3: richtung andern
+            erdRadius.rotiereUmZ(schritt_Rad);
+            schrittCNT++;
+            schritt_Rad = 0 - (schritt_Rad / 10);
+            erdRadiusNXT.rotiereUmZ(schritt_Rad);
+
+            if (schritt_Rad < 0)
+            {
+                std::cout << std::setprecision(prec);
+                std::cout << std::fixed;
+                std::cout << "sucht nach uhrzeugersinn fuer " << schrittCNT << " schritt/e" << std::endl;
+                std::cout << "durchsetzt schhrittlaenge jetzt mit " << schritt_Rad << std::endl;
+                std::cout << "______________________________________________________________________" << std::endl;
+            }
+            else if (schritt_Rad > 0)
+            {
+                std::cout << std::setprecision(prec);
+                std::cout << std::fixed;
+                std::cout << "sucht gegen uhrzeigersinn fuer " << schrittCNT << " schritt/e" << std::endl;
+                std::cout << "durchsetzt schrittlaenge jetzt mit " << schritt_Rad << std::endl;
+                std::cout << "______________________________________________________________________" << std::endl;
+            }
+            gesSchritt = gesSchritt + schrittCNT;
+            schrittCNT = 0;
+        }
+        else if (sicht.winkel(erdRadius) < M_PI/2 && sicht.winkel(erdRadiusNXT) > M_PI/2)
+        {
+            //letzte schritt in dieser richtung
+            //1: letzte schritt machen
+            //2: ausgabe
+            //3: richtung andern
+            erdRadius.rotiereUmZ(schritt_Rad);
+            schrittCNT++;
+            schritt_Rad = 0 - (schritt_Rad / 10);
+            erdRadiusNXT.rotiereUmZ(schritt_Rad);
+
+            if (schritt_Rad < 0)
+            {
+                std::cout << std::setprecision(prec);
+                std::cout << std::fixed;
+                std::cout << "sucht nach uhrzeugersinn fuer " << schrittCNT << " schritt/e" << std::endl;
+                std::cout << "durchsetzt schhrittlaenge jetzt mit " << schritt_Rad << std::endl;
+                std::cout << "______________________________________________________________________" << std::endl;
+            }
+            else if (schritt_Rad > 0)
+            {
+                std::cout << std::setprecision(prec);
+                std::cout << std::fixed;
+                std::cout << "sucht gegen uhrzeigersinn fuer " << schrittCNT << " schritt/e" << std::endl;
+                std::cout << "durchsetzt schrittlaenge jetzt mit " << schritt_Rad << std::endl;
+                std::cout << "______________________________________________________________________" << std::endl;
+            }
+            gesSchritt = gesSchritt + schrittCNT;
+            schrittCNT = 0;
+        }
+        else if (sicht.winkel(erdRadius) == M_PI/2)
+        {
+            break;
+        }
+    }
+
+    double sichtLaenge = sicht.laenge() / 1000;
     double hohe = aussichtsPunkt.laenge();
 
+    double winkel_grad = erdRadius.winkel(normVektor) * (180/M_PI);
+
     // Output
+    std::cout << std::endl << "__________________________________________________" << std::endl;
     std::cout << std::fixed;
-    std::cout << std::setprecision(4);
-    std::cout << "sie koennen " << sichtLaenge << " meter weit sehen" << std::endl;
+    std::cout << std::setprecision(2);
+    std::cout << "sie koennen " << sichtLaenge << " km weit sehen" << std::endl;
     std::cout << std::fixed;
-    std::cout << std::setprecision(4);
+    std::cout << std::setprecision(2);
     std::cout << "sie sind " << hohe << " meter hoch" << std::endl;
     std::cout << std::fixed;
-    std::cout << std::setprecision(4);
-    std::cout << "die winkel betraegt " << winkel << " rad" << std::endl;
+    std::cout << std::setprecision(prec);
+    std::cout << "die winkel betraegt " << winkel_grad << " grad" << std::endl;
     std::cout << std::fixed;
     std::cout << std::setprecision(0);
-    std::cout << "anzahl schritte: " << schrittCNT << std::endl;
+    std::cout << "anzahl schritte: " << gesSchritt << std::endl;
 
     return 0;
 
