@@ -70,14 +70,14 @@ double Vektor::winkel(const Vektor& input) const
     double winkelWert;
     double tmp_skalarProd = skalarProd(input);
     double tmp_laenge = laenge();
-    double tmp_laengeInput = sqrt(pow(input.x,2)+pow(input.y,2)+pow(input.z,2));
+    double tmp_laengeInput = input.laenge();
     if (tmp_skalarProd == 0)
     {
         winkelWert = M_PI/2;
     }
     else
     {
-        winkelWert = acos((tmp_laenge*tmp_laengeInput)/tmp_skalarProd);
+        winkelWert = acos(tmp_skalarProd / (tmp_laenge*tmp_laengeInput));
     }
     
     
@@ -86,6 +86,6 @@ double Vektor::winkel(const Vektor& input) const
 
 void Vektor::rotiereUmZ(const double rad)
 {
-    x = (cos(rad)*x) - (sin(rad)*x);
-    y = (sin(rad)*x) + (cos(rad)*x);
+    x = (cos(rad)*x) - (sin(rad)*y);
+    y = (sin(rad)*x) + (cos(rad)*y);
 }
