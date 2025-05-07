@@ -86,6 +86,7 @@ double Vektor::winkel(const Vektor& input) const
 
 void Vektor::rotiereUmZ(const double rad)
 {
+    double tmpX = x;
     x = (cos(rad)*x) - (sin(rad)*y);
-    y = (sin(rad)*x) + (cos(rad)*y);
+    y = (sin(rad)*tmpX) + (cos(rad)*y);
 }
