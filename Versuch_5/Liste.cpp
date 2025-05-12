@@ -87,17 +87,23 @@ bool Liste::dataLoesch(unsigned int suchNr)
     {
         if (cursor->getData().getMatNr() == suchNr)
         {
-            if (cursor->getPrev())
+            std::cout << "dieser student wird geloescht: ";
+            std::cout << cursor->getData().getName() << " ";
+            std::cout << cursor->getData().getMatNr() << " ";
+            std::cout << cursor->getData().getGeburtstag() << " ";
+            std::cout << cursor->getData().getAdresse() << std::endl;
+
+            if (cursor->getPrev() != nullptr)
             {
-                cursor->getPrev()->setNext(cursor->getNext());
+                (cursor->getPrev())->setNext(cursor->getNext());
             }
             else
             {
                 front = cursor->getNext(); 
             }
-            if (cursor->getNext())
+            if (cursor->getNext() != nullptr)
             {
-                cursor->getNext()->setPrev(cursor->getPrev());
+                (cursor->getNext())->setPrev(cursor->getPrev());
             }
             else
             {
@@ -162,6 +168,7 @@ void Liste::ausgabeVorwaerts() const
     	cursor->getData().ausgabe();
         cursor = cursor->getNext();
     }
+    delete cursor;
 }
 
 /**
@@ -178,4 +185,5 @@ void Liste::ausgabeRueckwarets() const
     	cursor->getData().ausgabe();
         cursor = cursor->getPrev();
     }
+    delete cursor;
 }
