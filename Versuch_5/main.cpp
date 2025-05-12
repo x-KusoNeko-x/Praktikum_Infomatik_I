@@ -103,6 +103,7 @@ int main()
 
                     studentenListe.pushFront(student);
                 }
+                break;
 
             // Datenelement vorne entfernen
             case '3':
@@ -145,25 +146,30 @@ int main()
                 {
                     std::cout << "Die Liste ist leer\n\n";
                 }
-                
-                
-            
+                break;
+
             //Datenelement entfernen
             case '6':
+                if (!studentenListe.empty())
                 {
                     unsigned int matNr;
-                    std::cout << "Geben Sie die Matrikelnummer ein";
+                    std::cout << "Geben Sie die Matrikelnummer ein: ";
                     std::cin >> matNr;
-                
+
                     if (studentenListe.dataLoesch(matNr))
                     {
-                        std::cout << "Student erfolgreich geloescht." <<std::endl;
+                        std::cout << "Student erfolgreich geloescht." << std::endl;
                     }
                     else
                     {
-                       std::cout << "Kein Student mit dieser Matrikelnummer gefunden." << std::endl;
+                        std::cout << "Kein Student mit dieser Matrikelnummer gefunden." << std::endl;
                     }
                 }
+                else
+                {
+                    std::cout << "Die Liste ist leer\n\n";
+                }
+                break;
 
             case '0':
                 std::cout << "Das Programm wird nun beendet";
