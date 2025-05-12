@@ -79,6 +79,13 @@ void Liste::popFront()
     }
 }
 
+/**
+ * @brief data nach such loeschen
+ * 
+ * @param suchNr matikelnummer fur geloeschete student
+ * 
+ * @return true wenn matNr gefunden und loesch verfachen geht dann automatisch
+ */
 bool Liste::dataLoesch(unsigned int suchNr)
 {
     ListenElement* cursor = front;
