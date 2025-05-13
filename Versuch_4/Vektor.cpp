@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
-// Praktikum Informatik 1 
-// 
+// Praktikum Informatik 1
+//
 // Versuch 04: Einf�hrung Klasse
 //
 // Datei:  Vektor.cpp
@@ -20,7 +20,7 @@ Vektor::~Vektor()
 }
 
 /**
- * @brief Function printing the components of the vector 
+ * @brief Function printing the components of the vector
  */
 void Vektor::ausgabe() const
 {
@@ -29,7 +29,14 @@ void Vektor::ausgabe() const
     std::cout << "Z-Komponente: " << z << std::endl << std::endl;
 }
 
-//Laenge rechnen
+/**
+*@brief Laenge von vektor rechnen
+*
+*@param tmp_xpow template x hoch 2
+*@param tmp_ypow template y hoch 2
+*@param tmp_zpow template z hoch 2
+*@param tmp_laenge template laenge von vektor
+*/
 double Vektor::laenge() const
 {
     double tmp_xpow = pow(x,2);
@@ -41,6 +48,16 @@ double Vektor::laenge() const
     return tmp_laenge;
 }
 
+/**
+ * @brief rechnen summe von 2 vektor
+ *
+ * @param tmp_x
+ * @param tmp_y
+ * @param tmp_z
+ * @param plusVektor template ergebniss
+ *
+ * @return summe
+ */
 Vektor Vektor::plus(const Vektor& input) const
 {
     double tmp_x = x + input.x;
@@ -50,6 +67,15 @@ Vektor Vektor::plus(const Vektor& input) const
     return plusVektor;
 }
 
+/**
+ * @fn Vektor sub(const Vektor&)const
+ * @brief minus rechnen von vektor
+ *
+ * @param input davon wird minus
+ * @param tmp
+ *
+ * @return ergebniss minus rechnen
+ */
 Vektor Vektor::sub(const Vektor& input) const
 {
     double tmp_x = x - input.x;
@@ -59,12 +85,29 @@ Vektor Vektor::sub(const Vektor& input) const
     return subVektor;
 }
 
+/**
+ * @fn double skalarProd(const Vektor&)const
+ * @brief skalarprodukt von vektor rechnen
+ *
+ * @param input zweite vektor
+ * @return skalarprodukt
+ */
 double Vektor::skalarProd(const Vektor& input) const
 {
     double skalarProdWert = (x*input.x) + (y*input.y) + (z*input.z);
     return skalarProdWert;
 }
 
+/**
+ * @fn double winkel(const Vektor&)const
+ * @brief winkel zwischen zwei vektor rechnen
+ *
+ * @param input zweite vektor
+ * @param winkelWert template ergebnisse
+ * @param tmp
+ *
+ * @return winkel
+ */
 double Vektor::winkel(const Vektor& input) const
 {
     double winkelWert;
@@ -79,11 +122,18 @@ double Vektor::winkel(const Vektor& input) const
     {
         winkelWert = acos(tmp_skalarProd / (tmp_laenge*tmp_laengeInput));
     }
-    
-    
+
+
     return winkelWert;
 }
 
+/**
+ * @fn void rotiereUmZ(const double)
+ * @brief vektor um z achse rotieren
+ *
+ * @param rad winkel die wir routieren sollen
+ * @param tmpX template x, damit x bei rechnen nicht andert
+ */
 void Vektor::rotiereUmZ(const double rad)
 {
     double tmpX = x;
