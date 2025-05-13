@@ -12,6 +12,15 @@ using namespace std;
 #include <iostream>
 #include <string>
 
+/**
+ * @brief nach klartext fragen und klartext verschluesseln
+ * 
+ * @param laenge laenge von klartext
+ * @param n index in klartext
+ * @param m index in lookup-table
+ * 
+ * @return verschluesselte geheimtext
+ */
 string verschluesseln(char schluessel[2][26], string wort)
 {
 	// Hier folgt Ihr Code
@@ -43,6 +52,15 @@ string verschluesseln(char schluessel[2][26], string wort)
 	return wort;
 }
 
+/**
+ * @brief geheimtext wieder entschluesseln
+ * 
+ * @param laenge laenge von geheinmtext
+ * @param m
+ * @param n
+ * 
+ * @return rekonstruntuirtes kalrtext
+ */
 string entschluesseln(char schluessel[2][26], string wort)
 {
 	// Hier folgt Ihr Code
