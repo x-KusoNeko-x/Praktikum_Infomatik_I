@@ -38,7 +38,7 @@ public:
      *
      * Funktion gibt alle Informationen eines Mediums auf der Konsole aus
      */
-    virtual void ausgabe() const;
+    virtual void ausgabe() const = 0;
 
     /*!
      * @brief Ausleihen-Funktion
@@ -49,7 +49,7 @@ public:
      * \return bool: true,  wenn die Ausleihbeschr�nkungen erf�llt sind und das Medium ausgeliehen werden kann
      *               false, wenn die Ausleihbeschr�nkungen nicht erf�llt sind und das Medium nicht ausgeliehen werden kann
      */
-    bool ausleihen(Person person, Datum ausleihdatum);
+    virtual bool ausleihen(Person person, Datum ausleihdatum) = 0;
 
     /*!
      * @brief Gibt ein Medium in die B�cherei zur�ck

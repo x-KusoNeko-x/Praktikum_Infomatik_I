@@ -410,10 +410,9 @@ void mediumZurueckgeben(std::vector<Medium*>& medien)
 void alleMedienAusgeben(std::vector<Medium*>& medien)
 {
     std::cout << "Vorhandene Medien in der B�cherei:" << std::endl;
-
+    
     for (unsigned int index = 0; index < medien.size(); index++)
     {
         std::cout << "*************************************************************" << std::endl;
-        medien[index]->ausgabe();
     }
 }

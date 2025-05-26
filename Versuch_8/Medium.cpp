@@ -24,21 +24,6 @@ Medium::~Medium(void)
 }
 
 
-void Medium::ausgabe() const
-{
-    std::cout << "ID: " << ID << std::endl;
-    std::cout << "Titel: " << titel << std::endl;
-
-    if (status)
-    {
-        std::cout << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
-    }
-    else
-    {
-        std::cout << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
-    }
-}
-
 bool Medium::ausleihen(Person person, Datum ausleihdatum)
 {
     if (status)
@@ -73,3 +58,4 @@ unsigned int Medium::getID()
 {
     return ID;
 }
+

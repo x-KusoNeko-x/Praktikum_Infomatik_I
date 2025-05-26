@@ -9,4 +9,5 @@ public:
 	virtual ~Buch(void);
 
 	void ausgabe() const override;
+	bool ausleihen(Person person, Datum ausleihdatum);
 };
