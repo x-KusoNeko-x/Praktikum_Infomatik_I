@@ -9,7 +9,7 @@ public:
 
 	virtual ~Magazin(void);
 
-	void ausgabe() const override;
+	void ausgabe(std::ostream& output) const override;
 	bool ausleihen(Person person, Datum ausleihdatum) override;
 };
 

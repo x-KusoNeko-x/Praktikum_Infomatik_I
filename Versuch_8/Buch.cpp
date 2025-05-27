@@ -14,18 +14,18 @@ Buch::~Buch(void)
 {
 }
 
-void Buch::ausgabe() const {
-	std::cout << "ID: " << ID << std::endl
+void Buch::ausgabe(std::ostream& output) const {
+	output << "ID: " << ID << std::endl
 		<< "Typ: Buch" << std::endl
 		<< "Titel: " << titel << std::endl
 		<< "Autor: " << autor << std::endl;
 	if (status)
 	{
-		std::cout << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
+		output << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
 	}
 	else
 	{
-		std::cout << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
+		output << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
 	}
 }
 

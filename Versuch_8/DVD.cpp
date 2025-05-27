@@ -15,7 +15,7 @@ DVD::~DVD(void)
 {
 }
 
-void DVD::ausgabe() const {
+void DVD::ausgabe(std::ostream& output) const {
 	std::cout << "ID: " << ID << std::endl
 		<< "Typ: DVD" << std::endl
 		<< "Titel: " << titel << std::endl
@@ -23,11 +23,11 @@ void DVD::ausgabe() const {
 		<< "Genre: " << genre << std::endl;
 	if (status)
 	{
-		std::cout << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
+		output << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
 	}
 	else
 	{
-		std::cout << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
+		output << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
 	}
 }
 

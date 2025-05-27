@@ -33,6 +33,12 @@
 
 #endif
 
+std::ostream& operator <<(std::ostream& output, Medium& medium) 
+{
+    medium.ausgabe(output);
+    return output;
+}
+
 
   // Vorw�rtsdeklarationen aller vorhandenen Funktionen
 void fuelleDatenbank(std::vector<Medium*>& medien);
@@ -409,10 +415,16 @@ void mediumZurueckgeben(std::vector<Medium*>& medien)
 ////////////////////////////////////////////////////
 void alleMedienAusgeben(std::vector<Medium*>& medien)
 {
-    std::cout << "Vorhandene Medien in der B�cherei:" << std::endl;
+    std::cout << "Vorhandene Medien in der Buecherei:" << std::endl;
     
-    for (unsigned int index = 0; index < medien.size(); index++)
+    std::vector<Medium*>::iterator it;
+    it = medien.begin();
+    while (it != medien.end())
     {
-        std::cout << "*************************************************************" << std::endl;
+        Medium* tmpMedium = *it;
+        std::cout << "____________________________________________________________________" << std::endl;
+        std::cout << tmpMedium << std::endl;
+        std::cout << "____________________________________________________________________" << std::endl;
+        it++;
     }
 }

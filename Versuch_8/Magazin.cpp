@@ -15,19 +15,19 @@ Magazin::~Magazin(void)
 {
 }
 
-void Magazin::ausgabe() const {
-	std::cout << "ID: " << ID << std::endl
+void Magazin::ausgabe(std::ostream& output) const {
+	output << "ID: " << ID << std::endl
 		<< "Typ: Magazin" << std::endl
 		<< "Titel: " << titel << std::endl
 		<< "AusgabeDatum: " << datumAusgabe << std::endl
 		<< "Sparte: " << sparte << std::endl;
 	if (status)
 	{
-		std::cout << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
+		output << "Status : Das Medium ist seit dem " << datumAusgeliehen << " an " << personAusgeliehen.getName() << " ausgeliehen." << std::endl;
 	}
 	else
 	{
-		std::cout << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
+		output << "Status: Medium ist zurzeit nicht verliehen." << std::endl;
 	}
 }
 
