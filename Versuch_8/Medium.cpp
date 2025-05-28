@@ -59,3 +59,8 @@ unsigned int Medium::getID()
     return ID;
 }
 
+bool Medium::getStatus() 
+{
+    return status;
+}
+

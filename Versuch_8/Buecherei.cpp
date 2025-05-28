@@ -47,6 +47,7 @@ void mediumEntfernen(std::vector<Medium*>& medien);
 void mediumAusleihen(std::vector<Medium*>& medien, Datum aktuellesDatum);
 void mediumZurueckgeben(std::vector<Medium*>& medien);
 void alleMedienAusgeben(std::vector<Medium*>& medien);
+void auslMedienAusgeben(std::vector<Medium*>& medien);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,6 +81,7 @@ int main()
             << "(3): Datenbank ausgeben" << std::endl
             << "(4): Ein Medium verleihen" << std::endl
             << "(5): Ein Medium zur�cknehmen" << std::endl
+            << "(6): Ausgeleihenen Medien ausgeben" << std::endl
             << "(7): Beenden" << std::endl;
 
         // Einlesen der Abfrage
@@ -131,6 +133,12 @@ int main()
         case '5':
         {
             mediumZurueckgeben(medien);
+            break;
+        }
+
+        case '6':
+        {
+            auslMedienAusgeben(medien);
             break;
         }
 
@@ -423,8 +431,38 @@ void alleMedienAusgeben(std::vector<Medium*>& medien)
     {
         Medium* tmpMedium = *it;
         std::cout << "____________________________________________________________________" << std::endl;
-        std::cout << tmpMedium << std::endl;
+        std::cout << *tmpMedium << std::endl;
         std::cout << "____________________________________________________________________" << std::endl;
         it++;
+    }
+}
+
+void auslMedienAusgeben(std::vector<Medium*>& medien)
+{
+    std::cout << "Alle ausgenleihenen Medien in der Buecherei:" << std::endl;
+    std::vector<Medium*>::iterator ait;
+    ait = medien.begin();
+
+    int auslCNT = 0;
+
+    while (ait != medien.end())
+    {
+        Medium* tmpMedium = *ait;
+        if (tmpMedium->getStatus() == true)
+        {
+            std::cout << "_____________________________________________________________" << std::endl;
+            std::cout << *tmpMedium << std::endl;
+            std::cout << "_____________________________________________________________" << std::endl;
+            ait++;
+            auslCNT++;
+        }
+        else
+        {
+            ait++;
+        }
+    }
+    if (auslCNT == 0)
+    {
+        std::cout << "kein Meidum ausgeleihen!" << std::endl;
     }
 }
