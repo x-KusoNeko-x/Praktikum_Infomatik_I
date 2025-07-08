@@ -7,7 +7,12 @@ Testat1/第一次测试:
   Versuch1-5 wird kontrolliert /实验1-5将被检查.
   
   Doxygen ist notwendig fur bestanden der testat /doxygen注释对于通过考试是必须的.
+
+Testat2/第二次测试:
   
-  过了！耶耶耶！
+  Versuch6-9 wird kontrolliert /实验6-9将被检查.
+  
+  Doxygen ist notwendig fur bestanden der testat /doxygen注释对于通过考试是必须的.
+  
 
 以上信息和代码仅供参考。
